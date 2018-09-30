@@ -8,7 +8,7 @@ import { API_URLS } from '../../constants';
 
 const KidList = styled.ul`
   list-style: none;
-  padding: 0rem 0rem 0rem 2rem;
+  padding: 0 0 0 2rem;
   border-left: 2px solid black;
 `;
 
@@ -29,11 +29,22 @@ class Item extends Component {
 
     const { data } = await axios.get(API_URLS.ITEM.replace('{id}', itemId));
 
-    console.log(data);
-
-    await this.setState({
+    this.setState({
       item: data,
     });
+  }
+
+  async componentDidUpdate(prevProps) {
+    const { itemId: prevId } = prevProps;
+    const { itemId } = this.props;
+
+    if (prevId !== itemId) {
+      const { data } = await axios.get(API_URLS.ITEM.replace('{id}', itemId));
+
+      this.setState({
+        item: data,
+      });
+    }
   }
 
   generateItemList() {

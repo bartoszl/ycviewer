@@ -23,7 +23,9 @@ export const getList = filters => (dispatch) => {
 
   return axios.get(API_URLS.NEW_STORIES)
     .then((result) => {
-      dispatch(requestListSuccess(result.data.slice(0, 10)));
+      const { data } = result;
+
+      dispatch(requestListSuccess(data.sort((a, b) => b - a), data.length));
     })
     .catch(err => dispatch(requestListFailure(err)));
 };

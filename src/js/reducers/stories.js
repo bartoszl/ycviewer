@@ -20,6 +20,7 @@ export default (state = initialState, action) => {
         ...state,
         isFetching: false,
         records: action.records,
+        numberOfRecords: action.numberOfRecords,
       };
     case STORIES.REQUEST_LIST_FAILURE:
       return {

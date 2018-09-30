@@ -10,14 +10,15 @@ const Layout = styled.div`
 `;
 
 const App = () => (
-  <BrowserRouter>
-    <Layout>
+  <Layout>
+    <BrowserRouter>
       <Switch>
         <Route path="/item/:id" component={CommentPage} />
+        <Route path="/:page" component={IndexPage} />
         <Route path="/" component={IndexPage} />
       </Switch>
-    </Layout>
-  </BrowserRouter>
+    </BrowserRouter>
+  </Layout>
 );
 
 export default App;
