@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { Item, StoriesList } from '../../containers';
+
 export default () => (
-  <p> Index </p>
+  <StoriesList />
+  // <Item itemId={18106847} />
 );
