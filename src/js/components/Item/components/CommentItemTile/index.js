@@ -6,7 +6,11 @@ import ItemTileWrapper from '../ItemTileWrapper';
 
 const CommentTileWrapper = styled(ItemTileWrapper)`
   font-size: 0.8rem;
-  margin-left: 2rem;
+  background-color: #EEEEEE;
+
+  span {
+    font-weight: 600;
+  }
 `;
 
 const CommentItemTile = ({ item }) => {

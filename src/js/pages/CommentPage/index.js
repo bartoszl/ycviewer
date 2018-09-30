@@ -6,6 +6,7 @@ import { Item } from '../../components';
 
 const CommentList = styled.ul`
   list-style: none;
+  padding: 0px;
 `;
 
 const CommentPage = ({ match }) => {

@@ -8,6 +8,8 @@ import { API_URLS } from '../../constants';
 
 const KidList = styled.ul`
   list-style: none;
+  padding: 0rem 0rem 0rem 2rem;
+  border-left: 2px solid black;
 `;
 
 class Item extends Component {
