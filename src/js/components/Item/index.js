@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
+import { ItemTile, CommentItemTile } from './components';
 import { API_URLS } from '../../constants';
 
 class Item extends Component {
@@ -13,6 +14,7 @@ class Item extends Component {
     };
 
     this.generateItemList = this.generateItemList.bind(this);
+    this.renderItemTile = this.renderItemTile.bind(this);
   }
 
   async componentDidMount() {
@@ -36,10 +38,18 @@ class Item extends Component {
     }
 
     return item.kids.map(child => (
-      <li>
-        <Item itemId={child} />
-      </li>
+      <Item itemId={child} />
     ));
+  }
+
+  renderItemTile() {
+    const { item } = this.state;
+
+    if (!item.parent) {
+      return <ItemTile item={item} />;
+    }
+
+    return <CommentItemTile item={item} />;
   }
 
   render() {
@@ -50,13 +60,12 @@ class Item extends Component {
     }
 
     return (
-      <li>
-        { item.title }
-        { item.text }
+      <Fragment>
+        { this.renderItemTile() }
         <ul>
           { this.generateItemList() }
         </ul>
-      </li>
+      </Fragment>
     );
   }
 }
