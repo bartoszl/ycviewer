@@ -1,9 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import styled from 'styled-components';
 
 import { ItemTile, CommentItemTile } from './components';
 import { API_URLS } from '../../constants';
+
+const KidList = styled.ul`
+  list-style: none;
+`;
 
 class Item extends Component {
   constructor(props) {
@@ -62,9 +67,9 @@ class Item extends Component {
     return (
       <Fragment>
         { this.renderItemTile() }
-        <ul>
+        <KidList>
           { this.generateItemList() }
-        </ul>
+        </KidList>
       </Fragment>
     );
   }

@@ -1,5 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+import ItemTileWrapper from '../ItemTileWrapper';
+
+const CommentTileWrapper = styled(ItemTileWrapper)`
+  font-size: 0.8rem;
+  margin-left: 2rem;
+`;
 
 const CommentItemTile = ({ item }) => {
   if (item.deleted) {
@@ -7,15 +15,14 @@ const CommentItemTile = ({ item }) => {
   }
 
   return (
-    <li>
-      <h5>
-        Author:&nbsp;
+    <CommentTileWrapper>
+      <span>
         { item.by }
-      </h5>
+      </span>
       <p>
         { item.text }
       </p>
-    </li>
+    </CommentTileWrapper>
   );
 };
 

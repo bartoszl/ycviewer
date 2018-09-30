@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 
 import { getList as getStoriesAction } from '../../actions/stories';
 import { Item } from '../../components';
+
+const StoryList = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
 
 class StoriesList extends Component {
   constructor(props) {
@@ -34,9 +41,9 @@ class StoriesList extends Component {
     }
 
     return (
-      <ul>
+      <StoryList>
         { this.generateStoriesList() }
-      </ul>
+      </StoryList>
     );
   }
 }
