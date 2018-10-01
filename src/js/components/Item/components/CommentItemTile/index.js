@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import ReactHtmlParser from 'react-html-parser';
+
 
 import ItemTileWrapper from '../ItemTileWrapper';
 import { LIGHT_GRAY } from '../../../../styles/colors';
@@ -26,7 +28,7 @@ const CommentItemTile = ({ item }) => {
         { item.by }
       </span>
       <p>
-        { item.text }
+        { ReactHtmlParser(item.text) }
       </p>
     </CommentTileWrapper>
   );
