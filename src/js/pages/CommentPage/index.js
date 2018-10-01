@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import { Item, UnstyledList } from '../../components';
+import { Item, UnstyledList, NavigateBackButton } from '../../components';
 
 const CommentPage = ({ match }) => {
   const { id } = match.params;
 
   return (
-    <UnstyledList>
-      <Item itemId={id} />
-    </UnstyledList>
+    <Fragment>
+      <NavigateBackButton />
+      <UnstyledList>
+        <Item itemId={id} />
+      </UnstyledList>
+    </Fragment>
   );
 };
 

@@ -33,6 +33,7 @@ const TopItem = styled.h5`
 const OutsideLink = styled.a`
   text-decoration: none;
   color: ${GRAY};
+  cursor: pointer;
 
   &:hover {
     color: #444444;
