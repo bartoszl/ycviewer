@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { TRANSITION } from '../../styles/utils';
+import { TRANSITION, BORDER_RADIUS } from '../../styles/utils';
 import { PRIMARY } from '../../styles/colors';
 
 const BackButton = styled.button`
@@ -14,7 +14,8 @@ const BackButton = styled.button`
   border: 1px solid ${PRIMARY};
   color: ${PRIMARY};
   padding: 1rem 2rem;
-  border-radius: 3px;
+  border-radius: ${BORDER_RADIUS};
+  background-color: white;
 
   &:hover {
     color: white;

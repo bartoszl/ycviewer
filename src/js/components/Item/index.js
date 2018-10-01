@@ -6,10 +6,12 @@ import styled from 'styled-components';
 import { ItemTile, CommentItemTile } from './components';
 import { API_URLS, ITEM_TYPE } from '../../constants';
 
+import { PRIMARY } from '../../styles/colors';
+
 const KidList = styled.ul`
   list-style: none;
   padding: 0 0 0 2rem;
-  border-left: 2px solid black;
+  border-left: 2px solid ${PRIMARY};
 `;
 
 class Item extends Component {

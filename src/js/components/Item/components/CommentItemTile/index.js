@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import ItemTileWrapper from '../ItemTileWrapper';
+import { LIGHT_GRAY } from '../../../../styles/colors';
+import { FONT_SIZE_SM, FONT_WEIGHT_BOLD } from '../../../../styles/text';
 
 const CommentTileWrapper = styled(ItemTileWrapper)`
-  font-size: 0.8rem;
-  background-color: #EEEEEE;
+  font-size: ${FONT_SIZE_SM};
+  background-color: ${LIGHT_GRAY};
 
   span {
-    font-weight: 600;
+    font-weight: ${FONT_WEIGHT_BOLD};
   }
 `;
 

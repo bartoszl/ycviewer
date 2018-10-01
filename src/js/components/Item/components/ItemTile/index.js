@@ -6,23 +6,22 @@ import moment from 'moment';
 
 import ItemTileWrapper from '../ItemTileWrapper';
 
-import { GRAY } from '../../../../styles/colors';
+import { GRAY, DARK_GRAY } from '../../../../styles/colors';
+import { FONT_SIZE_SM } from '../../../../styles/text';
 
-const ButtonWrapper = styled.div`
+const BottomWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
-
-  font-size: 0.8rem;
+  font-size: ${FONT_SIZE_SM};
 `;
 
 const TopWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
-  font-size: 0.8rem;
+  font-size: ${FONT_SIZE_SM};
   color: ${GRAY};
 `;
 
@@ -36,7 +35,7 @@ const OutsideLink = styled.a`
   cursor: pointer;
 
   &:hover {
-    color: #444444;
+    color: ${DARK_GRAY};
   }
 `;
 
@@ -45,7 +44,7 @@ const StyledLink = styled(Link)`
   color: ${GRAY};
 
   &:hover {
-    color: #444444;
+    color: ${DARK_GRAY};
   }
 `;
 
@@ -65,7 +64,7 @@ const ItemTile = ({ item }) => (
       { item.title }
     </h3>
 
-    <ButtonWrapper>
+    <BottomWrapper>
       <span>
         Score:&nbsp;
         { item.score }
@@ -81,7 +80,7 @@ const ItemTile = ({ item }) => (
       >
         Read more
       </OutsideLink>
-    </ButtonWrapper>
+    </BottomWrapper>
   </ItemTileWrapper>
 );
 

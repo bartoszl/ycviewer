@@ -27,22 +27,6 @@ export default (state = initialState, action) => {
         ...state,
         isFetching: false,
       };
-    case STORIES.REQUEST_SINGLE:
-      return {
-        ...state,
-        isFetchingSingle: true,
-      };
-    case STORIES.REQUEST_SINGLE_SUCCESS:
-      return {
-        ...state,
-        isFetchingSingle: false,
-        record: action.record,
-      };
-    case STORIES.REQUEST_SINGLE_FAILURE:
-      return {
-        ...state,
-        isFetchingSingle: false,
-      };
     default:
       return state;
   }
