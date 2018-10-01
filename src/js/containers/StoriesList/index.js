@@ -1,18 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 import Pagination from 'react-js-pagination';
 import { withRouter } from 'react-router-dom';
 
 import { getList as getStoriesAction } from '../../actions/stories';
-import { Item } from '../../components';
+import { Item, UnstyledList } from '../../components';
+import { PaginationWrapper } from './components';
 
-const StoryList = styled.ul`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-`;
+import { STORIES_TYPE } from '../../constants';
 
 class StoriesList extends Component {
   constructor(props) {
@@ -27,15 +23,25 @@ class StoriesList extends Component {
   }
 
   componentDidMount() {
-    const { getStories } = this.props;
+    const { getStories, storyType } = this.props;
 
-    getStories();
+    getStories(storyType);
+  }
+
+  componentDidUpdate(prev) {
+    const { getStories, storyType } = this.props;
+
+    if (prev.storyType !== storyType) {
+      getStories(storyType);
+    }
   }
 
   handlePageChange(pageNumber) {
-    const { history } = this.props;
+    const { history, getStories, match } = this.props;
 
-    history.push(`/${pageNumber}`);
+    history.push(match.path.replace(':page?', pageNumber));
+
+    getStories(STORIES_TYPE.TOP_STORIES);
   }
 
   generateStoriesList() {
@@ -53,8 +59,10 @@ class StoriesList extends Component {
   }
 
   render() {
-    const { isFetching, numberOfRecords } = this.props;
-    const { page, perPage } = this.state;
+    const { isFetching, numberOfRecords, match } = this.props;
+    const { perPage } = this.state;
+
+    const page = parseInt(match.params.page, 10) || 1;
 
     if (isFetching) {
       return <h1> Loading... </h1>;
@@ -62,16 +70,18 @@ class StoriesList extends Component {
 
     return (
       <Fragment>
-        <StoryList>
+        <UnstyledList>
           { this.generateStoriesList() }
-        </StoryList>
-        <Pagination
-          activePage={page}
-          itemsCountPerPage={perPage}
-          totalItemsCount={numberOfRecords}
-          pageRangeDisplayed={5}
-          onChange={this.handlePageChange}
-        />
+        </UnstyledList>
+        <PaginationWrapper>
+          <Pagination
+            activePage={page}
+            itemsCountPerPage={perPage}
+            totalItemsCount={numberOfRecords}
+            pageRangeDisplayed={5}
+            onChange={this.handlePageChange}
+          />
+        </PaginationWrapper>
       </Fragment>
     );
   }
@@ -80,8 +90,11 @@ class StoriesList extends Component {
 StoriesList.propTypes = {
   getStories: PropTypes.func.isRequired,
   records: PropTypes.array.isRequired,
+  match: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
   isFetching: PropTypes.bool.isRequired,
   numberOfRecords: PropTypes.number.isRequired,
+  storyType: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = ({ stories }) => ({
@@ -91,7 +104,7 @@ const mapStateToProps = ({ stories }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getStories: () => dispatch(getStoriesAction()),
+  getStories: type => dispatch(getStoriesAction(type)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(StoriesList));

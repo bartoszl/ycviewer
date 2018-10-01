@@ -4,7 +4,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 import { ItemTile, CommentItemTile } from './components';
-import { API_URLS } from '../../constants';
+import { API_URLS, ITEM_TYPE } from '../../constants';
 
 const KidList = styled.ul`
   list-style: none;
@@ -22,6 +22,7 @@ class Item extends Component {
 
     this.generateItemList = this.generateItemList.bind(this);
     this.renderItemTile = this.renderItemTile.bind(this);
+    this.renderCommentsHeader = this.renderCommentsHeader.bind(this);
   }
 
   async componentDidMount() {
@@ -32,19 +33,6 @@ class Item extends Component {
     this.setState({
       item: data,
     });
-  }
-
-  async componentDidUpdate(prevProps) {
-    const { itemId: prevId } = prevProps;
-    const { itemId } = this.props;
-
-    if (prevId !== itemId) {
-      const { data } = await axios.get(API_URLS.ITEM.replace('{id}', itemId));
-
-      this.setState({
-        item: data,
-      });
-    }
   }
 
   generateItemList() {
@@ -63,23 +51,35 @@ class Item extends Component {
   renderItemTile() {
     const { item } = this.state;
 
-    if (!item.parent) {
-      return <ItemTile item={item} />;
+    if (item.type === ITEM_TYPE.COMMENT) {
+      return <CommentItemTile item={item} />;
     }
 
-    return <CommentItemTile item={item} />;
+    return <ItemTile item={item} />;
+  }
+
+  renderCommentsHeader() {
+    const { item } = this.state;
+    const { renderKids } = this.props;
+
+    if (!item.parent && renderKids) {
+      return <h3> Comments: </h3>;
+    }
+
+    return null;
   }
 
   render() {
     const { item } = this.state;
 
     if (!item) {
-      return null;
+      return <p>...</p>;
     }
 
     return (
       <Fragment>
         { this.renderItemTile() }
+        { this.renderCommentsHeader() }
         <KidList>
           { this.generateItemList() }
         </KidList>

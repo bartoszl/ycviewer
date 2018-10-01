@@ -3,12 +3,11 @@ import axios from 'axios';
 import { STORIES } from './types';
 import { API_URLS } from '../constants';
 
-const requestList = filters => ({
+const requestList = () => ({
   type: STORIES.REQUEST_LIST,
-  filters,
 });
 
-const requestListSuccess = (records, numberOfRecords = 100) => ({
+const requestListSuccess = (records, numberOfRecords) => ({
   type: STORIES.REQUEST_LIST_SUCCESS,
   records,
   numberOfRecords,
@@ -18,10 +17,10 @@ const requestListFailure = () => ({
   type: STORIES.REQUEST_LIST_FAILURE,
 });
 
-export const getList = filters => (dispatch) => {
-  dispatch(requestList(filters));
+export const getList = type => (dispatch) => {
+  dispatch(requestList());
 
-  return axios.get(API_URLS.TOP_STORIES)
+  return axios.get(API_URLS[type])
     .then((result) => {
       const { data } = result;
 
