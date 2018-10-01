@@ -8,8 +8,6 @@ import { getList as getStoriesAction } from '../../actions/stories';
 import { Item, UnstyledList } from '../../components';
 import { PaginationWrapper } from './components';
 
-import { STORIES_TYPE } from '../../constants';
-
 class StoriesList extends Component {
   constructor(props) {
     super(props);
@@ -29,19 +27,19 @@ class StoriesList extends Component {
   }
 
   componentDidUpdate(prev) {
-    const { getStories, storyType } = this.props;
+    const { getStories, storyType, match } = this.props;
+    const { page } = match.params;
+    const { page: prevPage } = prev.match.params;
 
-    if (prev.storyType !== storyType) {
+    if (prev.storyType !== storyType || page !== prevPage) {
       getStories(storyType);
     }
   }
 
   handlePageChange(pageNumber) {
-    const { history, getStories, match } = this.props;
+    const { history, match } = this.props;
 
     history.push(match.path.replace(':page?', pageNumber));
-
-    getStories(STORIES_TYPE.TOP_STORIES);
   }
 
   generateStoriesList() {

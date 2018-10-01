@@ -6,6 +6,8 @@ import moment from 'moment';
 
 import ItemTileWrapper from '../ItemTileWrapper';
 
+import { GRAY } from '../../../../styles/colors';
+
 const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -21,7 +23,7 @@ const TopWrapper = styled.div`
   justify-content: space-between;
 
   font-size: 0.8rem;
-  color: #888888;
+  color: ${GRAY};
 `;
 
 const TopItem = styled.h5`
@@ -30,7 +32,7 @@ const TopItem = styled.h5`
 
 const OutsideLink = styled.a`
   text-decoration: none;
-  color: #888888;
+  color: ${GRAY};
 
   &:hover {
     color: #444444;
@@ -39,7 +41,7 @@ const OutsideLink = styled.a`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: #888888;
+  color: ${GRAY};
 
   &:hover {
     color: #444444;
@@ -69,7 +71,7 @@ const ItemTile = ({ item }) => (
       </span>
       <StyledLink to={`/item/${item.id}`}>
         Comments:&nbsp;
-        { item.descendants }
+        { item.descendants || 'N/A' }
       </StyledLink>
       <OutsideLink
         href={item.url}
