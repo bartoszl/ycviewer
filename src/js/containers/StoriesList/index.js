@@ -52,7 +52,7 @@ export class StoriesList extends Component {
     const end = page * perPage;
 
     return records.slice(start, end).map(story => (
-      <Item key={story.id} itemId={story} renderKids={false} />
+      <Item key={story} itemId={story} renderKids={false} />
     ));
   }
 

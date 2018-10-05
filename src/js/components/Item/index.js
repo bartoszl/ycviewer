@@ -46,7 +46,7 @@ class Item extends Component {
     }
 
     return item.kids.map(child => (
-      <Item itemId={child} />
+      <Item key={child} itemId={child} />
     ));
   }
 
