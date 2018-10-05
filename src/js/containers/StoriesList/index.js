@@ -8,7 +8,7 @@ import { getList as getStoriesAction } from '../../actions/stories';
 import { Item, UnstyledList } from '../../components';
 import { PaginationWrapper } from './components';
 
-class StoriesList extends Component {
+export class StoriesList extends Component {
   constructor(props) {
     super(props);
 
@@ -52,7 +52,7 @@ class StoriesList extends Component {
     const end = page * perPage;
 
     return records.slice(start, end).map(story => (
-      <Item itemId={story} renderKids={false} />
+      <Item key={story.id} itemId={story} renderKids={false} />
     ));
   }
 
@@ -63,7 +63,7 @@ class StoriesList extends Component {
     const page = parseInt(match.params.page, 10) || 1;
 
     if (isFetching) {
-      return <h1> Loading... </h1>;
+      return <h1>Loading...</h1>;
     }
 
     return (

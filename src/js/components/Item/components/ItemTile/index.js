@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import moment from 'moment';
 
 import ItemTileWrapper from '../ItemTileWrapper';
+import LinkWrapper from './LinkWrapper';
 
 import { GRAY, DARK_GRAY } from '../../../../styles/colors';
 import { FONT_SIZE_SM } from '../../../../styles/text';
@@ -39,15 +39,6 @@ const OutsideLink = styled.a`
   }
 `;
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: ${GRAY};
-
-  &:hover {
-    color: ${DARK_GRAY};
-  }
-`;
-
 const ItemTile = ({ item }) => (
   <ItemTileWrapper>
     <TopWrapper>
@@ -69,10 +60,10 @@ const ItemTile = ({ item }) => (
         Score:&nbsp;
         { item.score }
       </span>
-      <StyledLink to={`/item/${item.id}`}>
-        Comments:&nbsp;
-        { item.descendants || 'N/A' }
-      </StyledLink>
+      <LinkWrapper
+        to={`/item/${item.id}`}
+        descendants={item.descendants}
+      />
       <OutsideLink
         href={item.url}
         target="_blank"

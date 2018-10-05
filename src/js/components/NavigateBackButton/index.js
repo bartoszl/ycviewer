@@ -23,7 +23,7 @@ const BackButton = styled.button`
   }
 `;
 
-const NavigateBackButton = ({ history }) => (
+export const NavigateBackButton = ({ history }) => (
   <BackButton onClick={history.goBack}>
     <span>Return</span>
   </BackButton>
